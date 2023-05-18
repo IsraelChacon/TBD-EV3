@@ -1,0 +1,124 @@
+EVA3_4_PROCEDIMIENTOS
+MySQL Shell 8.0.32
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': *******
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 11
+Server version: 8.0.32 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > desc customer;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| customer_id | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| store_id    | tinyint unsigned  | NO   | MUL | NULL              |                                               |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| email       | varchar(50)       | YES  |     | NULL              |                                               |
+| address_id  | smallint unsigned | NO   | MUL | NULL              |                                               |
+| active      | tinyint(1)        | NO   |     | 1                 |                                               |
+| create_date | datetime          | NO   |     | NULL              |                                               |
+| last_update | timestamp         | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+9 rows in set (0.0025 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select count(*) from customer;
++----------+
+| count(*) |
++----------+
+|      599 |
++----------+
+1 row in set (0.0280 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select email from customer limit 50;
++---------------------------------------+
+| email                                 |
++---------------------------------------+
+| MARY.SMITH@sakilacustomer.org         |
+| PATRICIA.JOHNSON@sakilacustomer.org   |
+| LINDA.WILLIAMS@sakilacustomer.org     |
+| BARBARA.JONES@sakilacustomer.org      |
+| ELIZABETH.BROWN@sakilacustomer.org    |
+| JENNIFER.DAVIS@sakilacustomer.org     |
+| MARIA.MILLER@sakilacustomer.org       |
+| SUSAN.WILSON@sakilacustomer.org       |
+| MARGARET.MOORE@sakilacustomer.org     |
+| DOROTHY.TAYLOR@sakilacustomer.org     |
+| LISA.ANDERSON@sakilacustomer.org      |
+| NANCY.THOMAS@sakilacustomer.org       |
+| KAREN.JACKSON@sakilacustomer.org      |
+| BETTY.WHITE@sakilacustomer.org        |
+| HELEN.HARRIS@sakilacustomer.org       |
+| SANDRA.MARTIN@sakilacustomer.org      |
+| DONNA.THOMPSON@sakilacustomer.org     |
+| CAROL.GARCIA@sakilacustomer.org       |
+| RUTH.MARTINEZ@sakilacustomer.org      |
+| SHARON.ROBINSON@sakilacustomer.org    |
+| MICHELLE.CLARK@sakilacustomer.org     |
+| LAURA.RODRIGUEZ@sakilacustomer.org    |
+| SARAH.LEWIS@sakilacustomer.org        |
+| KIMBERLY.LEE@sakilacustomer.org       |
+| DEBORAH.WALKER@sakilacustomer.org     |
+| JESSICA.HALL@sakilacustomer.org       |
+| SHIRLEY.ALLEN@sakilacustomer.org      |
+| CYNTHIA.YOUNG@sakilacustomer.org      |
+| ANGELA.HERNANDEZ@sakilacustomer.org   |
+| MELISSA.KING@sakilacustomer.org       |
+| BRENDA.WRIGHT@sakilacustomer.org      |
+| AMY.LOPEZ@sakilacustomer.org          |
+| ANNA.HILL@sakilacustomer.org          |
+| REBECCA.SCOTT@sakilacustomer.org      |
+| VIRGINIA.GREEN@sakilacustomer.org     |
+| KATHLEEN.ADAMS@sakilacustomer.org     |
+| PAMELA.BAKER@sakilacustomer.org       |
+| MARTHA.GONZALEZ@sakilacustomer.org    |
+| DEBRA.NELSON@sakilacustomer.org       |
+| AMANDA.CARTER@sakilacustomer.org      |
+| STEPHANIE.MITCHELL@sakilacustomer.org |
+| CAROLYN.PEREZ@sakilacustomer.org      |
+| CHRISTINE.ROBERTS@sakilacustomer.org  |
+| MARIE.TURNER@sakilacustomer.org       |
+| JANET.PHILLIPS@sakilacustomer.org     |
+| CATHERINE.CAMPBELL@sakilacustomer.org |
+| FRANCES.PARKER@sakilacustomer.org     |
+| ANN.EVANS@sakilacustomer.org          |
+| JOYCE.EDWARDS@sakilacustomer.org      |
+| DIANE.COLLINS@sakilacustomer.org      |
++---------------------------------------+
+50 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > set @miscorreos = "";
+Query OK, 0 rows affected (0.0051 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select @miscorreos;
++-------------+
+| @miscorreos |
++-------------+
+|             |
++-------------+
+1 row in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > call listaCorreos(@miscorreos);
+Query OK, 0 rows affected (0.0085 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select @miscorreos;
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| @miscorreos                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ROBIN.HAYES@sakilacustomer.org;EMILY.DIAZ@sakilacustomer.org;LILLIAN.GRIFFIN@sakilacustomer.org;ANNIE.RUSSELL@sakilacustomer.org;DIANA.ALEXANDER@sakilacustomer.org;PAULA.BRYANT@sakilacustomer.org;NORMA.GONZALES@sakilacustomer.org;PHYLLIS.FOSTER@sakilacustomer.org;TINA.SIMMONS@sakilacustomer.org;LOIS.BUTLER@sakilacustomer.org;RUBY.WASHINGTON@sakilacustomer.org;JULIA.FLORES@sakilacustomer.org;BONNIE.HUGHES@sakilacustomer.org;WANDA.PATTERSON@sakilacustomer.org;JACQUELINE.LONG@sakilacustomer.org;ANNE.POWELL@sakilacustomer.org;SARA.PERRY@sakilacustomer.org;LOUISE.JENKINS@sakilacustomer.org;KATHRYN.COLEMAN@sakilacustomer.org;ANDREA.HENDERSON@sakilacustomer.org;MARILYN.ROSS@sakilacustomer.org;RACHEL.BARNES@sakilacustomer.org;LORI.WOOD@sakilacustomer.org;JANE.BENNETT@sakilacustomer.org;IRENE.PRICE@sakilacustomer.org;TAMMY.SANDERS@sakilacustomer.org;DENISE.KELLY@sakilacustomer.org;BEVERLY.BROOKS@sakilacustomer.org;THERESA.WATSON@sakilacustomer.org;KATHY.JAMES@sakilacustomer.org;CHRISTINA.RAMIREZ@sakilacustomer.org;JUDY.GRAY@sakilacustomer.org;NICOLE.PETERSON@sakilacustomer.org;KELLY.TORRES@sakilacustomer.org;JANICE.WARD@sakilacustomer.org;ROSE.HOWARD@sakilacustomer.org;JUDITH.COX@sakilacustomer.org;ASHLEY.RICHARDSON@sakilacustomer.org;JOAN.COOPER@sakilacustomer.org;KATHERINE.RIVERA@sakilacustomer.org;MILDRED.BAILEY@sakilacustomer.org;CHERYL.MURPHY@sakilacustomer.org;JEAN.BELL@sakilacustomer.org;EVELYN.MORGAN@sakilacustomer.org;GLORIA.COOK@sakilacustomer.org;DORIS.REED@sakilacustomer.org;TERESA.ROGERS@sakilacustomer.org;HEATHER.MORRIS@sakilacustomer.org;JULIE.SANCHEZ@sakilacustomer.org;ALICE.STEWART@sakilacustomer.org;DIANE.COLLINS@sakilacustomer.org;JOYCE.EDWARDS@sakilacustomer.org;ANN.EVANS@sakilacustomer.org;FRANCES.PARKER@sakilacustomer.org;CATHERINE.CAMPBELL@sakilacustomer.org;JANET.PHILLIPS@sakilacustomer.org;MARIE.TURNER@sakilacustomer.org;CHRISTINE.ROBERTS@sakilacustomer.org;CAROLYN.PEREZ@sakilacustomer.org;STEPHANIE.MITCHELL@sakilacustomer.org;AMANDA.CARTER@sakilacustomer.org;DEBRA.NELSON@sakilacustomer.org;MARTHA.GONZALEZ@sakilacustomer.org;PAMELA.BAKER@sakilacustomer.org;KATHLEEN.ADAMS@sakilacustomer.org;VIRGINIA.GREEN@sakilacustomer.org;REBECCA.SCOTT@sakilacustomer.org;ANNA.HILL@sakilacustomer.org;AMY.LOPEZ@sakilacustomer.org;BRENDA.WRIGHT@sakilacustomer.org;MELISSA.KING@sakilacustomer.org;ANGELA.HERNANDEZ@sakilacustomer.org;CYNTHIA.YOUNG@sakilacustomer.org;SHIRLEY.ALLEN@sakilacustomer.org;JESSICA.HALL@sakilacustomer.org;DEBORAH.WALKER@sakilacustomer.org;KIMBERLY.LEE@sakilacustomer.org;SARAH.LEWIS@sakilacustomer.org;LAURA.RODRIGUEZ@sakilacustomer.org;MICHELLE.CLARK@sakilacustomer.org;SHARON.ROBINSON@sakilacustomer.org;RUTH.MARTINEZ@sakilacustomer.org;CAROL.GARCIA@sakilacustomer.org;DONNA.THOMPSON@sakilacustomer.org;SANDRA.MARTIN@sakilacustomer.org;HELEN.HARRIS@sakilacustomer.org;BETTY.WHITE@sakilacustomer.org;KAREN.JACKSON@sakilacustomer.org;NANCY.THOMAS@sakilacustomer.org;LISA.ANDERSON@sakilacustomer.org;DOROTHY.TAYLOR@sakilacustomer.org;MARGARET.MOORE@sakilacustomer.org;SUSAN.WILSON@sakilacustomer.org;MARIA.MILLER@sakilacustomer.org;JENNIFER.DAVIS@sakilacustomer.org;ELIZABETH.BROWN@sakilacustomer.org;BARBARA.JONES@sakilacustomer.org;LINDA.WILLIAMS@sakilacustomer.org;PATRICIA.JOHNSON@sakilacustomer.org;MARY.SMITH@sakilacustomer.org; |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > \use eva_3
+Default schema set to `eva_3`.
+Fetching global names, object names from `eva_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_3  SQL > create table fechas(
+                                      -> fecha date);
+Query OK, 0 rows affected (0.0273 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > insert into fechas

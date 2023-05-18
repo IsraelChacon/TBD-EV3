@@ -1,0 +1,68 @@
+MySQL Shell 8.0.32
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': *******
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 11
+Server version: 8.0.32 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \use eva_3
+Default schema set to `eva_3`.
+Fetching global names, object names from `eva_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_3  SQL > desc actor;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id    | smallint unsigned | NO   |     | 0                 |                                               |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   |     | NULL              |                                               |
+| last_update | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+4 rows in set (0.0032 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > insert into actor(actor_id, first_name, last_name)
+                                      -> values (1000,"x","y");
+Query OK, 1 row affected (0.0170 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select agregar_actor(201,'Pedro','Pascal');
++-------------------------------------+
+| agregar_actor(201,'Pedro','Pascal') |
++-------------------------------------+
+|                                   1 |
++-------------------------------------+
+1 row in set (0.0120 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > drop function agregar_funcion;
+ERROR: 1305 (42000): FUNCTION eva_3.agregar_funcion does not exist
+ MySQL  localhost:3306 ssl  eva_3  SQL > drop function agregar_actor;
+Query OK, 0 rows affected (0.0105 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > drop function agregar_actor;
+Query OK, 0 rows affected (0.0076 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select agregar_actor('Pedro','Pascal');
++---------------------------------+
+| agregar_actor('Pedro','Pascal') |
++---------------------------------+
+|                               1 |
++---------------------------------+
+1 row in set (0.0091 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select max(actor_id) from actor;
++---------------+
+| max(actor_id) |
++---------------+
+|          1001 |
++---------------+
+1 row in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select factorial(5);
++--------------+
+| factorial(5) |
++--------------+
+|          120 |
++--------------+
+1 row in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL >

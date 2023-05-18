@@ -1,0 +1,140 @@
+EV3_1_FUNCTIONS
+MySQL Shell 8.0.32
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost;
+Creating a Classic session to 'root@localhost;'
+Please provide the password for 'root@localhost;': ********
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  SQL > \connect --mc root@localhost;
+Creating a Classic session to 'root@localhost;'
+Please provide the password for 'root@localhost;': *******
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': *******
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 9
+Server version: 8.0.32 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| agencia            |
+| comp2              |
+| company            |
+| credit_cards       |
+| eva_2              |
+| eva_3              |
+| evaluacion_1       |
+| human_resources    |
+| information_schema |
+| mysql              |
+| ordenes            |
+| performance_schema |
+| prueba1            |
+| prueba2            |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+17 rows in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  SQL > \use eva_2
+Default schema set to `eva_2`.
+Fetching global names, object names from `eva_2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_2  SQL > select regresa_uno();
+ERROR: 1305 (42000): FUNCTION eva_2.regresa_uno does not exist
+ MySQL  localhost:3306 ssl  eva_2  SQL > \use eva_3
+Default schema set to `eva_3`.
+Fetching global names, object names from `eva_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_3  SQL > select regresa_uno();
+ERROR: 1305 (42000): FUNCTION eva_3.regresa_uno does not exist
+ MySQL  localhost:3306 ssl  eva_3  SQL > select regresar_uno();
++----------------+
+| regresar_uno() |
++----------------+
+|              1 |
++----------------+
+1 row in set (0.0063 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select regresa_mensaje();
+ERROR: 1318 (42000): Incorrect number of arguments for FUNCTION eva_3.regresa_mensaje; expected 1, got 0
+ MySQL  localhost:3306 ssl  eva_3  SQL > select regresa_mensaje('Israel');
++---------------------------+
+| regresa_mensaje('Israel') |
++---------------------------+
+| holaIsrael                |
++---------------------------+
+1 row in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select regresa_mensaje('Israel') as mensaje;
++------------+
+| mensaje    |
++------------+
+| holaIsrael |
++------------+
+1 row in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > \use sakila
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > desc actor;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id    | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| last_update | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+4 rows in set (0.0039 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select count(*) from actor;
++----------+
+| count(*) |
++----------+
+|      200 |
++----------+
+1 row in set (0.0200 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > \use eva_3
+Default schema set to `eva_3`.
+Fetching global names, object names from `eva_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_3  SQL > create table actor select * from sakila.actor;
+Query OK, 200 rows affected (0.0383 sec)
+
+Records: 200  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  eva_3  SQL > desc actor;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| actor_id    | smallint unsigned | NO   |     | 0                 |                                               |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   |     | NULL              |                                               |
+| last_update | timestamp         | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+4 rows in set (0.0043 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select count(*) from eva_3;
+ERROR: 1146 (42S02): Table 'eva_3.eva_3' doesn't exist
+ MySQL  localhost:3306 ssl  eva_3  SQL > select count(*) from actor;
++----------+
+| count(*) |
++----------+
+|      200 |
++----------+
+1 row in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select contar_actor as actores;
+ERROR: 1054 (42S22): Unknown column 'contar_actor' in 'field list'
+ MySQL  localhost:3306 ssl  eva_3  SQL > select contar_actor as actores;
+ERROR: 1054 (42S22): Unknown column 'contar_actor' in 'field list'
+ MySQL  localhost:3306 ssl  eva_3  SQL > select contar_actor() as actores;
++---------+
+| actores |
++---------+
+|     200 |
++---------+
+1 row in set (0.0033 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL >

@@ -1,0 +1,131 @@
+EVA3_5_EJERCICIOS_CURSORES
+MySQL Shell 8.0.32
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': *******
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \use eva_3
+Default schema set to `eva_3`.
+Fetching global names, object names from `eva_3` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  eva_3  SQL > SELECT generar_rfc('Pérez', 'Jolote', 'Juan', '1975-11-23');
++------------------------------------------------------+
+| generar_rfc('Pérez', 'Jolote', 'Juan', '1975-11-23') |
++------------------------------------------------------+
+| PéJJ19751123                                         |
++------------------------------------------------------+
+1 row in set (0.0057 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > create table personas(
+                                      -> id int auto_increment primary key,
+                                      -> nombre varchar(50) not null,
+                                      -> apellido_pat varchar(50) not null,
+                                      -> apellido_mat varchar(50),
+                                      -> fecha_nac date,
+                                      -> clave_rfc varchar(50));
+Query OK, 0 rows affected (0.0306 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > show tables;
++-----------------+
+| Tables_in_eva_3 |
++-----------------+
+| actor           |
+| fechas          |
+| personas        |
++-----------------+
+3 rows in set (0.0029 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > desc personas;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id           | int         | NO   | PRI | NULL    | auto_increment |
+| nombre       | varchar(50) | NO   |     | NULL    |                |
+| apellido_pat | varchar(50) | NO   |     | NULL    |                |
+| apellido_mat | varchar(50) | YES  |     | NULL    |                |
+| fecha_nac    | date        | YES  |     | NULL    |                |
+| clave_rfc    | varchar(50) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.0037 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > INSERT INTO personas (nombre, apellido_pat, apellido_mat, fecha_nac)
+                                      -> VALUES
+                                      ->     ('Juan', 'Pérez', 'Jolote', '1975-11-23'),
+                                      ->     ('María', 'González', 'García', '1982-04-15'),
+                                      ->     ('Pedro', 'Martínez', 'Mendez', '1979-09-06'),
+                                      ->     ('Ana', 'Sánchez', 'Salazar', '1990-03-29'),
+                                      ->     ('Diego', 'López', 'Lara', '1985-07-11'),
+                                      ->     ('Laura', 'Hernández', 'Hernández', '1976-12-04'),
+                                      ->     ('Luis', 'García', 'García', '1995-01-31'),
+                                      ->     ('Carla', 'Fernández', NULL, '1988-11-25'),
+                                      ->     ('Miguel', 'Díaz', 'Dominguez', '1992-06-19'),
+                                      ->     ('Lucía', 'Ramírez', 'Ruiz', '1977-10-02');
+Query OK, 10 rows affected (0.0138 sec)
+
+Records: 10  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  eva_3  SQL > select * from personas;
++----+--------+--------------+--------------+------------+-----------+
+| id | nombre | apellido_pat | apellido_mat | fecha_nac  | clave_rfc |
++----+--------+--------------+--------------+------------+-----------+
+|  1 | Juan   | Pérez        | Jolote       | 1975-11-23 | NULL      |
+|  2 | María  | González     | García       | 1982-04-15 | NULL      |
+|  3 | Pedro  | Martínez     | Mendez       | 1979-09-06 | NULL      |
+|  4 | Ana    | Sánchez      | Salazar      | 1990-03-29 | NULL      |
+|  5 | Diego  | López        | Lara         | 1985-07-11 | NULL      |
+|  6 | Laura  | Hernández    | Hernández    | 1976-12-04 | NULL      |
+|  7 | Luis   | García       | García       | 1995-01-31 | NULL      |
+|  8 | Carla  | Fernández    | NULL         | 1988-11-25 | NULL      |
+|  9 | Miguel | Díaz         | Dominguez    | 1992-06-19 | NULL      |
+| 10 | Lucía  | Ramírez      | Ruiz         | 1977-10-02 | NULL      |
++----+--------+--------------+--------------+------------+-----------+
+10 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > CALL actualizar_rfc();
+Query OK, 0 rows affected (0.0077 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select * from personas;
++----+--------+--------------+--------------+------------+-----------+
+| id | nombre | apellido_pat | apellido_mat | fecha_nac  | clave_rfc |
++----+--------+--------------+--------------+------------+-----------+
+|  1 | Juan   | Pérez        | Jolote       | 1975-11-23 | NULL      |
+|  2 | María  | González     | García       | 1982-04-15 | NULL      |
+|  3 | Pedro  | Martínez     | Mendez       | 1979-09-06 | NULL      |
+|  4 | Ana    | Sánchez      | Salazar      | 1990-03-29 | NULL      |
+|  5 | Diego  | López        | Lara         | 1985-07-11 | NULL      |
+|  6 | Laura  | Hernández    | Hernández    | 1976-12-04 | NULL      |
+|  7 | Luis   | García       | García       | 1995-01-31 | NULL      |
+|  8 | Carla  | Fernández    | NULL         | 1988-11-25 | NULL      |
+|  9 | Miguel | Díaz         | Dominguez    | 1992-06-19 | NULL      |
+| 10 | Lucía  | Ramírez      | Ruiz         | 1977-10-02 | NULL      |
++----+--------+--------------+--------------+------------+-----------+
+10 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > set @rfc = "";
+Query OK, 0 rows affected (0.0009 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > call actualizar_rfc(@rfc);
+ERROR: 1318 (42000): Incorrect number of arguments for PROCEDURE eva_3.actualizar_rfc; expected 0, got 1
+ MySQL  localhost:3306 ssl  eva_3  SQL > DROP PROCEDURE IF EXISTS actualizar_rfc;
+Query OK, 0 rows affected (0.0123 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > call actualizar_rfc();
+Query OK, 0 rows affected (0.0355 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL > select * from personas;
++----+--------+--------------+--------------+------------+--------------+
+| id | nombre | apellido_pat | apellido_mat | fecha_nac  | clave_rfc    |
++----+--------+--------------+--------------+------------+--------------+
+|  1 | Juan   | Pérez        | Jolote       | 1975-11-23 | JuPJ19751123 |
+|  2 | María  | González     | García       | 1982-04-15 | MaGG19820415 |
+|  3 | Pedro  | Martínez     | Mendez       | 1979-09-06 | PeMM19790906 |
+|  4 | Ana    | Sánchez      | Salazar      | 1990-03-29 | AnSS19900329 |
+|  5 | Diego  | López        | Lara         | 1985-07-11 | DiLL19850711 |
+|  6 | Laura  | Hernández    | Hernández    | 1976-12-04 | LaHH19761204 |
+|  7 | Luis   | García       | García       | 1995-01-31 | LuGG19950131 |
+|  8 | Carla  | Fernández    | NULL         | 1988-11-25 | NULL         |
+|  9 | Miguel | Díaz         | Dominguez    | 1992-06-19 | MiDD19920619 |
+| 10 | Lucía  | Ramírez      | Ruiz         | 1977-10-02 | LuRR19771002 |
++----+--------+--------------+--------------+------------+--------------+
+10 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  eva_3  SQL >
